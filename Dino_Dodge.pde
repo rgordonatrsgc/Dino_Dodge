@@ -2,6 +2,10 @@
 float x1;    // tracks horizontal position of first cactus
 float s1;    // speed for first cactus
 float a1;    // acceleration for first cactus
+float dinoY;     // tracks position of dino
+float dinoS;     // tracks speed of dino
+float dinoA;     // tracks acceleration of the dino
+float gravity;   // gravity
 
 // this function runs once only
 void setup() {
@@ -16,6 +20,18 @@ void setup() {
   
   // set the initial speed
   s1 = -1;
+  
+  // set dino initial vertical position
+  dinoY = 170;
+  
+  // set dino's initial speed
+  dinoS = 0;
+  
+  // set dino's initial acceleration
+  dinoA = 0;
+  
+  // set gravity
+  gravity = 0.005;
 }
 
 // this function runs repeatedly
@@ -38,5 +54,14 @@ void draw() {
      x1 = 900; // place off screen on right 
      s1 = -1;  // reset the speed (to avoid insanely fast movement)
   }
+
+  // draw the dino
+  ellipse(50, dinoY, 60, 60);
   
+}
+
+// respond to keypress 
+void keyPressed() {
+  
+  dinoY = 70; 
 }
