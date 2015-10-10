@@ -84,5 +84,8 @@ void keyPressed() {
   // Make dino move "up" on the screen
   // (negative acceleration is required, given direction of Y axis
   //  in Processing's co-ordinate system)
-  dinoA = -0.4; 
+  // Only permit dino to jump when it is on the ground
+  if (dinoY >= 170) {
+      dinoA = -0.4;
+  }
 }
