@@ -31,7 +31,7 @@ void setup() {
   dinoA = 0;
   
   // set gravity
-  gravity = 0.015;
+  gravity = 0.03;
 }
 
 // this function runs repeatedly
@@ -86,6 +86,6 @@ void keyPressed() {
   //  in Processing's co-ordinate system)
   // Only permit dino to jump when it is on the ground
   if (dinoY >= 170) {
-      dinoA = -0.4;
+      dinoA = -0.6;
   }
 }
