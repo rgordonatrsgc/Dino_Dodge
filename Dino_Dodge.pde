@@ -55,6 +55,12 @@ void draw() {
      s1 = -1;  // reset the speed (to avoid insanely fast movement)
   }
 
+  // Change dino's speed based on acceleration
+  dinoS = dinoS + dinoA;
+  
+  // Change dino's location based on speed
+  dinoY = dinoY + dinoS;
+
   // draw the dino
   ellipse(50, dinoY, 60, 60);
   
@@ -63,5 +69,8 @@ void draw() {
 // respond to keypress 
 void keyPressed() {
   
-  dinoY = 70; 
+  // Make dino move "up" on the screen
+  // (negative acceleration is required, given direction of Y axis
+  //  in Processing's co-ordinate system)
+  dinoA = -1; 
 }
