@@ -1,8 +1,12 @@
 // global variables (can be used everywhere below)
 float x1;    // tracks horizontal position of first cactus
+float y1;    // tracks vertical position of first cactus
+float r1;    // tracks radius of cactus sprite
 float s1;    // speed for first cactus
 float a1;    // acceleration for first cactus
-float dinoY;     // tracks position of dino
+float dinoX;     // tracks horizontal position of dino
+float dinoY;     // tracks vertical position of dino
+float dinoR;     // tracks radius of dinosaur sprite
 float dinoS;     // tracks speed of dino
 float dinoA;     // tracks acceleration of the dino
 float gravity;   // gravity
@@ -16,6 +20,12 @@ void setup() {
 
   // set the initial position of the cactus
   x1 = 900; // position it off-screen on the right
+  
+  // set cactus vertical position
+  y1 = 175;
+
+  // set cactus radius
+  r1 = 25;
 
   // set the intial acceleration
   a1 = -0.1;
@@ -23,8 +33,14 @@ void setup() {
   // set the initial speed
   s1 = -1;
 
+  // set dino initial horizontal position
+  dinoX = 50;
+
   // set dino initial vertical position
   dinoY = 170;
+
+  // set dino sprite's radius
+  dinoR = 30;
 
   // set dino's initial speed
   dinoS = 0;
@@ -44,15 +60,16 @@ void setup() {
 
 // this function runs repeatedly
 void draw() {
+  
   // background clears each time the program loops
   background(255);
 
   // draw the image-based "cactus"
-  // Need to subtract 25 from x and y position
+  // Need to subtract cactus radius from x and y position
   // since images are displayed by Processing based on their top-left corner
   // whereas circles are displayed based on their centre point
-  // (our previous "cactus" was a circle centred on x = x1, y = 175)
-  image(cactus, x1 - 25, 175 - 25); 
+  // (our previous "cactus" was a circle centred on (x1, y1) )
+  image(cactus, x1 - r1, y1 - r1); 
 
   // change the speed
   s1 = s1 + a1;
@@ -61,7 +78,7 @@ void draw() {
   x1 = x1 + s1;
 
   // put the cactus back on the right edge if it goes off the left edge
-  if (x1 < -25) {
+  if (x1 < -1*r1) {
     x1 = 900; // place off screen on right 
     s1 = -1;  // reset the speed (to avoid insanely fast movement)
   }
@@ -76,23 +93,23 @@ void draw() {
   dinoY = dinoY + dinoS;
 
   // When the dino hits the ground, acceleration and speed stop
-  // I made the threshold 170, because 200 is the bottom of the screen,
-  // and the radius of the "dino" is 30 pixels
-  if (dinoY > 170) {
+  // Subract radius of dino sprite from height of screen, so dino
+  // stops when bottom edege of it's sprite touches bottom of screen
+  if (dinoY > height - dinoR) {
     dinoS = 0;
     dinoA = 0;
     dinoY = 170;  // Sometimes dino goes a bit below "ground level", so reset to ground level
   }
 
   // draw the image-based "dino"
-  // Need to subtract 30 from x and y position
+  // Need to subtract dino's radius from x and y position
   // since images are displayed by Processing based on their top-left corner
   // whereas circles are displayed based on their centre point
-  // (our previous "dino" was a circle centred on x = 50, y = dinoY)
-  image(dino, 50 - 30, dinoY - 30);
+  // (our previous "dino" was a circle centred on (dinoX, dinoY) )
+  image(dino, dinoX - dinoR, dinoY - dinoR);
   
   // Check for collision
-  if ( isTouching(50, dinoY, 30, x1, 175, 25) == true ) {
+  if ( isTouching(dinoX, dinoY, dinoR, x1, y1, r1) == true ) {
      noLoop();
   }
 }
