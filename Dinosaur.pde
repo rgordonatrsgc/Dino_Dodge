@@ -70,45 +70,46 @@ class Dinosaur {
     }
   }
 
-  // getX
-  // 
-  // Purpose: Return the horizontal position of this dino
-  float getX() {
-    return x;
-  }
-
-  // setX
+  // isTouching
   //
-  // Purpose: Set the horizontal position of this dino
-  void setX(float x_) {
-    x = x_;
-  }
-
-  // getY
-  // 
-  // Purpose: Return the vertical position of this dino
-  float getY() {
-    return y;
-  }
-
-  // getRadius
-  // 
-  // Purpose: Return the radius of this dino sprite
-  float getRadius() {
-    return r;
-  }
-
-  // setSpeed
+  // Purpose: Tell us whether a cactus is touching this dinosaur
   //
-  // Purpose: Set the speed of this dino
-  void setSpeed(float s_) {
-    s = s_;
+  // Parameters:
+  //                Cactus c  - the cactus object to be checked
+  //
+  // Returns:  Whether the cactus is touching the dinosaur
+  boolean isTouching(Cactus c) {
+
+    // Find distance between the two character's boundary circles using the
+    // the Pythagorean Theorem
+    float verticalLegLength = y - c.getY();
+    float horizontalLegLength = x - c.getX();
+    float verticalLegLengthSquared = pow(verticalLegLength, 2);
+    float horizontalLegLengthSquared = pow(horizontalLegLength, 2);
+    float distanceBetweenCharacters = sqrt(horizontalLegLengthSquared + verticalLegLengthSquared);
+
+    // When the sum of the radii of the boundary circles of the two characters
+    // is less than that distance between the centre points of the two characters,
+    // they are not touching.
+    if ( r + c.getRadius() < distanceBetweenCharacters ) {
+      return false;
+    }
+
+    // Default return value is true
+    return true;
   }
   
-  // setAcceleration
+  // jump
   //
-  // Purpose: Set how quickly this cactus will accelerate
-  void setAcceleration(float a_) {
-     a = a_; 
+  // Purpose: Make the dinosaur jump
+  void jump() {
+    
+    // Make dino move "up" on the screen
+    if (y >= height - r) {    // Only permit dino to jump when it is on the ground
+      a = -0.6; // negative acceleration is required, given direction of Y axis
+    }
+    
   }
+  
+
 }
