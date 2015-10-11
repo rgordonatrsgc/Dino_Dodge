@@ -11,7 +11,8 @@ float dinoS;     // tracks speed of dino
 float dinoA;     // tracks acceleration of the dino
 float gravity;   // gravity
 PImage dino;     // Our "dino"
-PImage cactus;     // Our "cactus"
+PImage cactus;   // Our "cactus"
+int score;       // Track score for the game
 
 // this function runs once only
 void setup() {
@@ -56,6 +57,9 @@ void setup() {
 
   // set image for the cactus
   cactus = loadImage("ghost.png");
+  
+  // set initial score
+  score = 0;
 }
 
 // this function runs repeatedly
@@ -63,6 +67,12 @@ void draw() {
   
   // background clears each time the program loops
   background(255);
+  
+  // display score in top-right corner of screen
+  fill(0);
+  textSize(24);
+  textAlign(LEFT);
+  text(score, width - 30, 40);
 
   // draw the image-based "cactus"
   // Need to subtract cactus radius from x and y position
