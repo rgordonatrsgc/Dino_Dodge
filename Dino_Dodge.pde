@@ -17,8 +17,8 @@ void setup() {
   size(800, 200);
 
   // CACTUS INITIALIZATION
-  //               x    y    r     a    s
-  cactus1 = new Cactus(900, 175, 25, -0.1, -1);
+  //                    x    y    r     a  s   value
+  cactus1 = new Cactus(900, 175, 25, -0.1, -1, 25);
 
   // DINO INITIALIZATION
   //           x    y    r  a  s
@@ -90,7 +90,7 @@ void resetCactus() {
   if (cactus1.getX() < -1*cactus1.getRadius()) {
     cactus1.setX(900);         // place off screen on right 
     cactus1.setSpeed(-1);      // reset the speed (to avoid insanely fast movement)
-    score = score + 25;  // dino dodged this one, so increase the score
+    score = score + cactus1.getScoreValue();  // dino dodged this one, so increase the score
   }
 }
 

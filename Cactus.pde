@@ -1,20 +1,21 @@
 // Note: Class name must match file name.
 class Cactus {
 
-  // Global variabls -- accessible to any function in this class
+  // Global variables -- accessible to any function in this class
   //                 -- cannot be accessed from outside this class
-  float x;    // tracks horizontal position of first cactus
-  float y;    // tracks vertical position of first cactus
-  float r;    // tracks radius of cactus sprite
-  float s;    // speed for first cactus
-  float a;    // acceleration for first cactus
+  float x;      // tracks horizontal position of cactus
+  float y;      // tracks vertical position of cactus
+  float r;      // tracks radius of cactus sprite
+  float s;      // speed for first cactus
+  float a;      // acceleration for cactus
+  int value;  // score value for this cactus
   PImage cactus;   // Our "cactus"
 
   // constructor
   //
   // Purpose: Run once, when class is instantiated and an object created
   //          Note that constructor name must match class name.
-  Cactus(float x_, float y_, float r_, float a_, float s_) {
+  Cactus(float x_, float y_, float r_, float a_, float s_, int value_) {
 
     // set the initial position of the cactus
     x = x_;
@@ -30,6 +31,9 @@ class Cactus {
 
     // set the initial speed
     s = s_;
+
+    // set the score value
+    value = value_;
 
     // set image for the cactus
     cactus = loadImage("ghost.png");
@@ -90,5 +94,13 @@ class Cactus {
   void setSpeed(float s_) {
     s = s_;  
   }
+  
+  // getScoreValue
+  // 
+  // Purpose: Return the value of this cactus for scoring
+  int getScoreValue() {
+     return value; 
+  }
+  
 
 }

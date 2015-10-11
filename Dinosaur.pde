@@ -1,7 +1,7 @@
 // Note: Class name must match file name.
 class Dinosaur {
 
-  // Global variabls -- accessible to any function in this class
+  // Global variables -- accessible to any function in this class
   //                 -- cannot be accessed from outside this class
   float x;     // tracks horizontal position of dino
   float y;     // tracks vertical position of dino
