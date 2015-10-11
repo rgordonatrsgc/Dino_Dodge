@@ -31,7 +31,7 @@ void setup() {
   dinoA = 0;
   
   // set gravity
-  gravity = 0.005;
+  gravity = 0.03;
 }
 
 // this function runs repeatedly
@@ -55,6 +55,24 @@ void draw() {
      s1 = -1;  // reset the speed (to avoid insanely fast movement)
   }
 
+  // Change dino's acceleration based on gravity
+  dinoA = dinoA + gravity;
+
+  // Change dino's speed based on acceleration
+  dinoS = dinoS + dinoA;
+  
+  // Change dino's location based on speed
+  dinoY = dinoY + dinoS;
+  
+  // When the dino hits the ground, acceleration and speed stop
+  // I made the threshold 170, because 200 is the bottom of the screen,
+  // and the radius of the "dino" is 30 pixels
+  if (dinoY > 170) {
+     dinoS = 0;
+     dinoA = 0;
+     dinoY = 170;  // Sometimes dino goes a bit below "ground level", so reset to ground level
+  }
+
   // draw the dino
   ellipse(50, dinoY, 60, 60);
   
@@ -63,5 +81,11 @@ void draw() {
 // respond to keypress 
 void keyPressed() {
   
-  dinoY = 70; 
+  // Make dino move "up" on the screen
+  // (negative acceleration is required, given direction of Y axis
+  //  in Processing's co-ordinate system)
+  // Only permit dino to jump when it is on the ground
+  if (dinoY >= 170) {
+      dinoA = -0.6;
+  }
 }
