@@ -7,21 +7,23 @@ class Cactus {
   float y;      // tracks vertical position of cactus
   float r;      // tracks radius of cactus sprite
   float s;      // speed for first cactus
+  float Os;      // original speed for first cactus
   float a;      // acceleration for cactus
-  int value;  // score value for this cactus
+  int value;    // score value for this cactus
+  float scale;   // scaling factor for sprite size 
   PImage cactus;   // Our "cactus"
 
   // constructor
   //
   // Purpose: Run once, when class is instantiated and an object created
   //          Note that constructor name must match class name.
-  Cactus(float x_, float y_, float r_, float a_, float s_, int value_) {
+  Cactus(float r_, float a_, float s_, int value_, float scale_) {
 
     // set the initial position of the cactus
-    x = x_;
+    x = width + (r*2)*(int)random(80, 80*scale*s_);
 
     // set cactus vertical position
-    y = y_;
+    y = height - r_;
 
     // set cactus radius
     r = r_;
@@ -31,9 +33,13 @@ class Cactus {
 
     // set the initial speed
     s = s_;
+    Os = s_;
 
     // set the score value
     value = value_;
+    
+    // set the scaling value for the size of the sprite
+    scale = scale_;
 
     // set image for the cactus
     cactus = loadImage("ghost.png");
@@ -52,7 +58,7 @@ class Cactus {
     // since images are displayed by Processing based on their top-left corner
     // whereas circles are displayed based on their centre point
     // (our previous "cactus" was a circle centred on (x, y) )
-    image(cactus, x - r, y - r);
+    image(cactus, x - r, y - r, cactus.width * scale, cactus.height * scale);
 
     // change the speed
     s = s + a;
@@ -62,9 +68,9 @@ class Cactus {
 
     // put the cactus back on the right edge if it goes off the left edge
     if (x < -1*r) {
-      x = width + r*2;              // place off screen on right 
-      s = -1;                       // reset the speed (to avoid insanely fast movement)
-      return currentScore + value;  // dino dodged this one, so increase the score
+      x = width + (r*2)*(int)random(40, 40*scale*Os);    // place off screen on right 
+      s = Os;                               // reset the speed (to avoid insanely fast movement)
+      return currentScore + value;          // dino dodged this one, so increase the score
     }
     
     // default return value is current score
