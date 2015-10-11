@@ -71,8 +71,8 @@ void draw() {
   // display score in top-right corner of screen
   fill(0);
   textSize(24);
-  textAlign(LEFT);
-  text(score, width - 30, 40);
+  textAlign(RIGHT);
+  text(score, width - 15, 40);
 
   // draw the image-based "cactus"
   // Need to subtract cactus radius from x and y position
@@ -91,6 +91,7 @@ void draw() {
   if (x1 < -1*r1) {
     x1 = 900; // place off screen on right 
     s1 = -1;  // reset the speed (to avoid insanely fast movement)
+    score = score + 25;  // dino dodged this one, so increase the score
   }
 
   // Change dino's acceleration based on gravity
@@ -122,6 +123,7 @@ void draw() {
   if ( isTouching(dinoX, dinoY, dinoR, x1, y1, r1) == true ) {
      noLoop();
   }
+  
 }
 
 // respond to keypress 
