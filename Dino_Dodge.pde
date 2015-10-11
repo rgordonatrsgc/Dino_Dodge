@@ -84,6 +84,9 @@ void draw() {
   // animate the cactus
   animateCactus();
 
+  // Reset cactus
+  resetCactus();
+
   // animate the dino
   animateDino();
 
@@ -91,9 +94,6 @@ void draw() {
   if ( isTouching(dinoX, dinoY, dinoR, x1, y1, r1) == true ) {
     noLoop();
   }
-
-  // Reset cactus
-  resetCactus();
 }
 
 // respond to keypress 
@@ -125,23 +125,32 @@ void drawScore() {
 // Purpose: Update position of the cactus
 void animateCactus() {
 
-  // change the speed
-  s1 = s1 + a1;
-
-  // create the appearance of moving by changing the x position
-  x1 = x1 + s1;
-
   // draw the image-based "cactus"
   // Need to subtract cactus radius from x and y position
   // since images are displayed by Processing based on their top-left corner
   // whereas circles are displayed based on their centre point
   // (our previous "cactus" was a circle centred on (x1, y1) )
   image(cactus, x1 - r1, y1 - r1);
+
+  // change the speed
+  s1 = s1 + a1;
+
+  // create the appearance of moving by changing the x position
+  x1 = x1 + s1;
+
 }
 
 // animateDino
 // Purpose: Update the position of the dinosaur
 void animateDino() {
+  
+  // draw the image-based "dino"
+  // Need to subtract dino's radius from x and y position
+  // since images are displayed by Processing based on their top-left corner
+  // whereas circles are displayed based on their centre point
+  // (our previous "dino" was a circle centred on (dinoX, dinoY) )
+  image(dino, dinoX - dinoR, dinoY - dinoR);
+
   // Change dino's acceleration based on gravity
   dinoA = dinoA + gravity;
 
@@ -160,12 +169,6 @@ void animateDino() {
     dinoY = 170;  // Sometimes dino goes a bit below "ground level", so reset to ground level
   }
 
-  // draw the image-based "dino"
-  // Need to subtract dino's radius from x and y position
-  // since images are displayed by Processing based on their top-left corner
-  // whereas circles are displayed based on their centre point
-  // (our previous "dino" was a circle centred on (dinoX, dinoY) )
-  image(dino, dinoX - dinoR, dinoY - dinoR);
 }
 
 // resetCactus
