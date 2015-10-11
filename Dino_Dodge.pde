@@ -1,10 +1,10 @@
 // global variables (can be used everywhere below)
 
 // CACTUS INTIALIZATION
-Cactus c1;
+Cactus cactus1;
 
 // DINO VARIABLES
-Dino d;
+Dinosaur dino;
 
 // GAMEPLAY VARIABLES
 float gravity;   // gravity
@@ -18,11 +18,11 @@ void setup() {
 
   // CACTUS INITIALIZATION
   //               x    y    r     a    s
-  c1 = new Cactus(900, 175, 25, -0.1, -1);
+  cactus1 = new Cactus(900, 175, 25, -0.1, -1);
 
   // DINO INITIALIZATION
   //           x    y    r  a  s
-  d = new Dino(50, 170, 30, 0, 0);
+  dino = new Dinosaur(50, 170, 30, 0, 0);
 
   // GAMEPLAY INITIALIZATION
   // set gravity
@@ -42,16 +42,16 @@ void draw() {
   drawScore();
 
   // animate the cactus
-  c1.update();
+  cactus1.update();
 
   // Reset cactus
   resetCactus();
 
   // animate the dino
-  d.update(gravity);
+  dino.update(gravity);
 
   // Check for collision
-  if ( isTouching(d.getX(), d.getY(), d.getRadius(), c1.getX(), c1.getY(), c1.getRadius()) == true ) {
+  if ( isTouching(dino.getX(), dino.getY(), dino.getRadius(), cactus1.getX(), cactus1.getY(), cactus1.getRadius()) == true ) {
     noLoop();
   }
 }
@@ -64,8 +64,8 @@ void keyPressed() {
   //  in Processing's co-ordinate system)
   // Only permit dino to jump when it is on the ground
   if (key == ' ') {
-    if (d.getY() >= height - d.getRadius()) {
-      d.setAcceleration(-0.6);
+    if (dino.getY() >= height - dino.getRadius()) {
+      dino.setAcceleration(-0.6);
     }
   }
 }
@@ -87,9 +87,9 @@ void drawScore() {
 void resetCactus() {
 
   // put the cactus back on the right edge if it goes off the left edge
-  if (c1.getX() < -1*c1.getRadius()) {
-    c1.setX(900);         // place off screen on right 
-    c1.setSpeed(-1);      // reset the speed (to avoid insanely fast movement)
+  if (cactus1.getX() < -1*cactus1.getRadius()) {
+    cactus1.setX(900);         // place off screen on right 
+    cactus1.setSpeed(-1);      // reset the speed (to avoid insanely fast movement)
     score = score + 25;  // dino dodged this one, so increase the score
   }
 }

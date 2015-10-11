@@ -1,5 +1,5 @@
 // Note: Class name must match file name.
-class Dino {
+class Dinosaur {
 
   // Global variabls -- accessible to any function in this class
   //                 -- cannot be accessed from outside this class
@@ -14,7 +14,7 @@ class Dino {
   //
   // Purpose: Run once, when class is instantiated and an object created
   //          Note that constructor name must match class name.
-  Dino(float x_, float y_, float r_, float a_, float s_) {
+  Dinosaur(float x_, float y_, float r_, float a_, float s_) {
 
     // set dino initial horizontal position
     x = x_;
