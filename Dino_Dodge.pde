@@ -90,6 +90,11 @@ void draw() {
   // whereas circles are displayed based on their centre point
   // (our previous "dino" was a circle centred on x = 50, y = dinoY)
   image(dino, 50 - 30, dinoY - 30);
+  
+  // Check for collision
+  if ( isTouching(50, dinoY, 30, x1, 175, 25) == true ) {
+     noLoop();
+  }
 }
 
 // respond to keypress 
@@ -106,3 +111,32 @@ void keyPressed() {
   }
 }
 
+// isTouching
+// Purpose: Tell us whether two characters (with circular boundaries) are touching
+// Parameters:
+//                tX      - the x-position of the target's centre point
+//                tY      - the y-position of the target's centre point
+//                tR      - the radius of the target's boundary circle
+//                oX      - the x-position of the other character's centre point
+//                oY      - the y-position of the other character's centre point
+//                oR      - the radius of the other character's boundary circle
+boolean isTouching(float tX, float tY, float tR, float oX, float oY, float oR) {
+  
+  // Find distance between the two character's boundary circles using the
+  // the Pythagorean Theorem
+  float verticalLegLength = tY - oY;
+  float horizontalLegLength = tX - oX;
+  float verticalLegLengthSquared = pow(verticalLegLength, 2);
+  float horizontalLegLengthSquared = pow(horizontalLegLength, 2);
+  float distanceBetweenCharacters = sqrt(horizontalLegLengthSquared + verticalLegLengthSquared);
+  
+  // When the sum of the radii of the boundary circles of the two characters
+  // is less than that distance between the centre points of the two characters,
+  // they are not touching.
+  if ( tR + oR < distanceBetweenCharacters ) {
+    return false;
+  }
+  
+  // Default return value is true
+  return true;
+}
