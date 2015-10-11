@@ -1,17 +1,23 @@
 // global variables (can be used everywhere below)
+
+// CACTUS VARIABLES
 float x1;    // tracks horizontal position of first cactus
 float y1;    // tracks vertical position of first cactus
 float r1;    // tracks radius of cactus sprite
 float s1;    // speed for first cactus
 float a1;    // acceleration for first cactus
+PImage cactus;   // Our "cactus"
+
+// DINO VARIABLES
 float dinoX;     // tracks horizontal position of dino
 float dinoY;     // tracks vertical position of dino
 float dinoR;     // tracks radius of dinosaur sprite
 float dinoS;     // tracks speed of dino
 float dinoA;     // tracks acceleration of the dino
-float gravity;   // gravity
 PImage dino;     // Our "dino"
-PImage cactus;   // Our "cactus"
+
+// GAMEPLAY VARIABLES
+float gravity;   // gravity
 int score;       // Track score for the game
 
 // this function runs once only
@@ -19,6 +25,7 @@ void setup() {
   // draw the canvas
   size(800, 200);
 
+  // CACTUS INITIALIZATION
   // set the initial position of the cactus
   x1 = 900; // position it off-screen on the right
   
@@ -34,6 +41,10 @@ void setup() {
   // set the initial speed
   s1 = -1;
 
+  // set image for the cactus
+  cactus = loadImage("ghost.png");
+
+  // DINO INITIALIZATION
   // set dino initial horizontal position
   dinoX = 50;
 
@@ -49,14 +60,12 @@ void setup() {
   // set dino's initial acceleration
   dinoA = 0;
 
-  // set gravity
-  gravity = 0.03;
-
   // set image for the dino
   dino = loadImage("mushroom.png");
 
-  // set image for the cactus
-  cactus = loadImage("ghost.png");
+  // GAMEPLAY INITIALIZATION
+  // set gravity
+  gravity = 0.03;
   
   // set initial score
   score = 0;
@@ -68,12 +77,9 @@ void draw() {
   // background clears each time the program loops
   background(255);
   
-  // display score in top-right corner of screen
-  fill(0);
-  textSize(24);
-  textAlign(RIGHT);
-  text(score, width - 15, 40);
-
+  // update the score
+  updateScore();
+  
   // draw the image-based "cactus"
   // Need to subtract cactus radius from x and y position
   // since images are displayed by Processing based on their top-left corner
@@ -138,6 +144,18 @@ void keyPressed() {
       dinoA = -0.6;
     }
   }
+}
+
+// updateScore
+// Purpose: Update the on-screen score
+void updateScore() {
+  
+  // display score in top-right corner of screen
+  fill(0);
+  textSize(24);
+  textAlign(RIGHT);
+  text(score, width - 15, 40);
+  
 }
 
 // isTouching
