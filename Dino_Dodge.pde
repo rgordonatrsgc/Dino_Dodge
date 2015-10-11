@@ -6,6 +6,8 @@ float dinoY;     // tracks position of dino
 float dinoS;     // tracks speed of dino
 float dinoA;     // tracks acceleration of the dino
 float gravity;   // gravity
+PImage dino;     // Our "dino"
+PImage cactus;     // Our "cactus"
 
 // this function runs once only
 void setup() {
@@ -32,6 +34,12 @@ void setup() {
   
   // set gravity
   gravity = 0.03;
+  
+  // set image for the dino
+  dino = loadImage("mushroom.png");
+
+  // set image for the cactus
+  cactus = loadImage("ghost.png");
 }
 
 // this function runs repeatedly
@@ -39,9 +47,12 @@ void draw() {
   // background clears each time the program loops
   background(255);
   
-  // draw a circle at bottom right corner of the screen
-  //       x    y    w   h
-  ellipse(x1, 175, 50, 50);
+  // draw the image-based "cactus"
+  // Need to subtract 25 from x and y position
+  // since images are displayed by Processing based on their top-left corner
+  // whereas circles are displayed based on their centre point
+  // (our previous "cactus" was a circle centred on x = x1, y = 175)
+  image(cactus, x1 - 25, 175 - 25); 
   
   // change the speed
   s1 = s1 + a1;
@@ -73,8 +84,12 @@ void draw() {
      dinoY = 170;  // Sometimes dino goes a bit below "ground level", so reset to ground level
   }
 
-  // draw the dino
-  ellipse(50, dinoY, 60, 60);
+  // draw the image-based "dino"
+  // Need to subtract 30 from x and y position
+  // since images are displayed by Processing based on their top-left corner
+  // whereas circles are displayed based on their centre point
+  // (our previous "dino" was a circle centred on x = 50, y = dinoY)
+  image(dino, 50 - 30, dinoY - 30); 
   
 }
 
